@@ -1,5 +1,5 @@
 # Network Simulator
-
+Created by Lyssie Brown and Liam Prior
 ## Purpose
 
 **What it is**: A simple simulator for a network of hosts and links that each have some probability of failure.
