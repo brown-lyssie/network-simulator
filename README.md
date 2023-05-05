@@ -16,21 +16,6 @@ This is a simulator.
 
 ## Plans
 
-```
-Host Class
-Attributes:
-- std::queue<Packet> Send (Outgoing) Buffer (FIFO)
-- std::queue<Packet> Receive (Incoming) Buffer (FIFO)
-- 
-```
-
-```
-Packet Class
-Attributes:
-- std::string Contents in roughly IPV6 Format
-```
-
-```
-Network Class
-Attributes:
-- Graph<Subgraph>
+Implement Simulator class
+- Prompts events to happen within hosts
+- Has a priority queue

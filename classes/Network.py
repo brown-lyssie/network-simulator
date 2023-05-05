@@ -1,6 +1,6 @@
-from .Host import Host
-from .Graph import Graph
-from .Packet import Packet
+from Host import Host
+from Graph import Graph
+from Packet import Packet
 
 class Network:
     __CHANCE_OF_HOST_FAILURE = .05
@@ -21,15 +21,18 @@ class Network:
     def is_host_in_network(self,ip: str):
         return self.graph.is_item_in_graph(Host(ip))
     def is_ip_valid(self, ip: str):
-        # NOTE: USING IPV6
-        # IPV6 uses 128 bits, 8 sections of 16 bits, 4 alphanumeric (hex) vals per section
-        # Example IP address: FE80:CD00:0000:0CDE:1257:0000:211E:729C
-        ip_sections = ip.split(":")
-        if len(ip_sections) != 8: return False
+        # NOTE: USING IPV4
+        # IPV4 uses 32 bits, 4 sections of 8 bits
+        # Example IP address: 
+        # 100.100.100.100
+        ip_sections = ip.split(".")
+        if len(ip_sections) != 4: return False
         for section in ip_sections:
-            if len(section) > 4: return False
+            if len(section) > 3: return False
             try:
-                int(section, 16)
+                i = int(section, 10)
+                if (i > 255):
+                    return False
             except ValueError:
                 return False
         return True
@@ -44,7 +47,7 @@ class Network:
         
 
         return self.graph.get_item_index(Host(ip))
-    def insert_incoming_packet(self, ip:str, incoming_item: "Packet", log = False, log_file_obj = None):
+    def insert_incoming_packet(self, ip:str, incoming_item, log = False, log_file_obj = None):
         host_index = self.get_host_index_from_ip(ip)
         successful_insert = self.graph.items[host_index].insert_incoming(incoming_item)
         if log:
@@ -68,10 +71,9 @@ class Network:
 # python3 classes/Network.py
 if __name__ == "__main__":
     n = Network()
-    n.add_host_to_network("FE80:CD00:0000:0CDE:1257:0000:211E:729C")
-    n.add_host_to_network("5555:CD00:0000:0CDE:1257:0000:211E:729C")
-    print(n.is_host_in_network("5555:CD00:0000:0CDE:1257:0000:211E:729C"))
-    print(n.get_incoming_buffer_from_ip("FE80:CD00:0000:0CDE:1257:0000:211E:729C"))
-
-    #print(n.get_host_index_from_ip("4.4.4.4.4.4.4.4"))
-
+    n.add_host_to_network("127.0.0.26")
+    n.add_host_to_network("127.0.0.26")
+    n.add_host_to_network("192.10.80.21")
+    print(n.is_host_in_network("127.0.0.26"))
+    print(n.is_host_in_network("192.10.800.21"))
+    print(n.get_incoming_buffer_from_ip("127.0.0.26"))
