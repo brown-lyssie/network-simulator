@@ -1,0 +1,43 @@
+# comments are after #'s
+# format for declaring devices
+# HOST IP
+# SITEHOST IP URL
+# DNS IP
+# - URL IP
+# - URL IP
+
+# first "subnet"
+ROUTER 50.50.0.10
+HOST 50.50.50.20
+HOST 50.50.50.21
+HOST 50.50.50.22
+HOST 50.50.50.23
+HOST 50.50.50.24
+HOST 50.50.50.25
+HOST 50.50.50.26
+HOST 50.50.50.27
+
+# second "subnet"
+ROUTER 200.200.0.3
+HOST 200.200.200.5
+HOST 200.200.200.6
+HOST 200.200.200.7
+HOST 200.200.200.8
+HOST 200.200.200.9
+HOST 200.200.200.10
+
+# site "subnet"
+ROUTER 100.100.100.5
+SITEHOST 150.150.150.10 jimsopinions.com
+SITEHOST 160.160.160.20 cardhub.com
+SITEHOST 170.170.170.30 rubiroofing.com
+SITEHOST 180.180.180.40 cm-services.com
+SITEHOST 190.190.190.50 free-bitcoin.com
+
+# dns that knows ip address of all sites
+DNS 5.5.5.5
+- 150.150.150.10 jimsopinions.com
+- 160.160.160.20 cardhub.com
+- 170.170.170.30 rubiroofing.com
+- 180.180.180.40 cm-services.com
+- 190.190.190.50 free-bitcoin.com
